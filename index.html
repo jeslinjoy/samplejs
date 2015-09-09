@@ -1,0 +1,52 @@
+<html>
+<head>
+<script> 
+    function ajax(){ 
+      var a = document.forms["myform"]["username"].value; 
+      var b = document.forms["myform"]["password"].value; 
+      //alert(a);
+      //alert(b);
+      if(a == '' || b == '')
+      {
+      	alert("Please Fill The Required Fields");
+      	location.reload();
+      }
+      
+      var formdata =a+':'+b; 
+      
+      xmlhttp = new XMLHttpRequest(); 
+      xmlhttp.onreadystatechange=function(){ 
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){ 
+          var result = xmlhttp.responseText; 
+          document.getElementById('textbox1').value=result;
+
+
+
+          document.getElementById("token_div").style="display:''";
+        }; 
+      }; 
+      xmlhttp.open("POST","",true); 
+      xmlhttp.send(formdata); 
+      return false; 
+    } 
+  </script> 
+</head>
+
+
+<body>
+
+<div align="center">
+<h1>Main Page</h1>
+
+<form id="myform" action="/" method="POST" onsubmit="return ajax();">
+<input type="text" name="username" placeholder="Username" style="margin:10px">  <br>
+
+<input type="password" name="password" placeholder="Password" style="margin:10px"><br>
+<input type="submit" value="Submit" style="margin:10px; width=40px;" >
+<div id="token_div">
+<textarea id='textbox1' cols="30" rows="10"></textarea>
+</form>
+
+</div>
+</body>
+</html>
